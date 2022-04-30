@@ -234,8 +234,6 @@ print('Simple Text Calculator\ntype ".help" for more info:\n')
 
 --> Main loop
 while true do
-    print(analyzeIt(parseIt('(20-5)*4')))
-    os.exit()
     io.write('>> ')
     local input = io.read()
 
@@ -245,6 +243,6 @@ while true do
         cmd = cmd:sub(2)
         meta_commands[ cmd ]()
     else
-        -- print(analyzeIt(parseIt(input)))
+        print(analyzeIt(parseIt(input)))
     end
 end
