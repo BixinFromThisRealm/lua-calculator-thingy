@@ -7,9 +7,9 @@
     constant pi (as PI, or pi) and parentheses. This calculator
     does not support functions of any kind or unary operators.
     
-	operations:
+    operations:
 	
-	- --> subtraction operator     ( 10 -  3  =  7   )
+    - --> subtraction operator     ( 10 -  3  =  7   )
     + --> addition operator        ( 10 +  3  = 13   )
     * --> multiplication operator  ( 10 *  3  = 30   )
     / --> division operator        ( 10 /  3  = 3.33 )
@@ -118,8 +118,8 @@ OP = {
 
 
 
---> Based on https://en.wikipedia.org/wiki/Shunting-yard_algorithm
-function PNtoRPN(exp)
+--> Based on the Shunting-yard algorithm
+function parseIt(exp)
     exp = string.gsub(exp, '[%(%)%-%+%*/%%]', '  %0  ') --> ensure tokens are separated by spaces
 
     local tokens = {}
@@ -129,18 +129,18 @@ function PNtoRPN(exp)
         table.insert(tokens, str)
     end
 
-    local output = ''
+    local output = {}
     local opStack = {}
 
     for i, v in ipairs(tokens) do
         if v:match('%d+') or v:upper() == 'PI' then
-            output = output .. tostring(v) .. ' '
+            table.insert(output, tostring(v))
         elseif v:match('[%-%+%*%%/%^]') then
             local o2 = opStack[#opStack]
 
             while o2 ~= nil and
                 (o2 ~= '(' and (OP[o2].prec > OP[v].prec or (OP[o2].prec == OP[v].prec and OP[v].leftAssoc))) do
-                output = output .. table.remove(opStack) .. ' '
+                table.insert(output, table.remove(opStack))
                 o2 = opStack[#opStack]
             end
 
@@ -153,13 +153,14 @@ function PNtoRPN(exp)
                     print('mismatched parentheses')
                     return
                 end
-                output = output .. table.remove(opStack) .. ' '
+                table.insert(output, table.remove(opStack))
             end
 
             if not (opStack[#opStack] == '(') then
                 print('right parentheses without corresponding "("')
                 return
             end
+			
             table.remove(opStack)
         end
     end
@@ -170,26 +171,18 @@ function PNtoRPN(exp)
             print('mismatched parentheses')
             return
         end
-        output = output .. table.remove(opStack) .. ' '
+        table.insert(output, table.remove(opStack))
     end
 
-    -- print(output)
+    -- print(table.concat(output, ', '))
 
     return output
 end
 
 
 --> Based on https://rosettacode.org/wiki/Parsing/RPN_calculator_algorithm#JavaScript
-function calcReversePolish(exp)
-    if exp == nil then
-        return nil
-    end
-
-    local tokens = {}
-
-    for str in exp:gmatch('([^%s]+)') do
-        table.insert(tokens, str)
-    end
+function analyzeIt(tokens)
+    if tokens == nil then return end
 
     local stack = {}
 
@@ -223,6 +216,7 @@ function calcReversePolish(exp)
                 print('can\'t understand "' .. v .. '" operator.')
                 return
             end
+            -- print(table.concat(stack, ', '))
         end
     end
 
@@ -240,6 +234,8 @@ print('Simple Text Calculator\ntype ".help" for more info:\n')
 
 --> Main loop
 while true do
+    print(analyzeIt(parseIt('(20-5)*4')))
+    os.exit()
     io.write('>> ')
     local input = io.read()
 
@@ -249,6 +245,6 @@ while true do
         cmd = cmd:sub(2)
         meta_commands[ cmd ]()
     else
-        print(calcReversePolish(PNtoRPN(input)))
+        -- print(analyzeIt(parseIt(input)))
     end
 end
