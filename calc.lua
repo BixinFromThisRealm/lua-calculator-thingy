@@ -8,7 +8,7 @@ TODO:
 
 - Implement functions with varying and optional parameters,
   the goal being to make an alias for every function in the lua math library.
-    
+
 - Maybe after implementing functions make a .help-about meta-command.
 ]]
 
@@ -22,14 +22,14 @@ function meta_commands.help()
 
     Description:
 
-    lua_calc is a simple text calculator with a full parser using 
+    A simple text calculator with a full parser using 
     the Shunting-Yard Algorithm and RPN. It supports simple
     binary operations (-, +, *, /, %), full precedence, the
     constant pi (as PI, or pi) and parentheses. This calculator
     does not support functions of any kind or unary operators.
     
     When executed with an argument (such as "lua calc.lua '70 - 5'"),
-    lua_calc will try to compute it as a mathematical expression and
+    it will try to compute it as a mathematical expression and
     then terminate.
 
     operators:
