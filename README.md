@@ -29,7 +29,7 @@ but if you just wanna use it in a execute-command-line-argument-and-then-termina
 
 Since the calculator works in this REPL way, we obviously need a way of exiting it, as well as providing ways to clear the terminal and other stuff. So, to fix this, i put in the calculator something i like to call **meta-commands**, it has nothing to do with that database stuff, i just find the name fitting and kinda cool.
 
-To use a meta-command you first type the `.` scape character, and then type the command you wish. Right now there are only three available meta-commands:
+To use a meta-command you first type the `.` escape character, and then type the command you wish. Right now there are only three available meta-commands:
 
 `.help`, which prints a help message with details about the calculator.
 
