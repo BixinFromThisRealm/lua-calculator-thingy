@@ -1,28 +1,3 @@
---[[
-    Description:
-    
-    Simple text calculator with a full parser using the
-    Shunting-Yard Algorithm and RPN. Supports simple
-    binary operations (-, +, *, /, %), full precedence, the
-    constant pi (as PI, or pi) and parentheses. This calculator
-    does not support functions of any kind or unary operators.
-    
-    operations:
-	
-    - --> subtraction operator     ( 10 -  3  =  7   )
-    + --> addition operator        ( 10 +  3  = 13   )
-    * --> multiplication operator  ( 10 *  3  = 30   )
-    / --> division operator        ( 10 /  3  = 3.33 )
-    % --> modulo operator          ( 10 %  3  =  1   )
-	
-    meta-commands:
-        
-    '.exit'        --> Breaks the main loop, terminating the application.
-    '.cls'         --> Clears the terminal.
-    '.help', '.h'  --> Prints this message.
-]]
-
-
 io.output():setvbuf 'no'
 
 
@@ -33,13 +8,17 @@ function meta_commands.help()
 
     Description:
 
-    Simple text calculator with a full parser using the
-    Shunting-Yard Algorithm and RPN. Supports simple
+    lua_calc is a simple text calculator with a full parser using 
+    the Shunting-Yard Algorithm and RPN. It supports simple
     binary operations (-, +, *, /, %), full precedence, the
     constant pi (as PI, or pi) and parentheses. This calculator
     does not support functions of any kind or unary operators.
+    
+    When executed with an argument (such as "lua calc.lua '70 - 5'"),
+    lua_calc will try to compute it as a mathematical expression and
+    then terminate.
 
-    operations:
+    operators:
 
     - --> subtraction operator     ( 10 -  3  =  7   )
     + --> addition operator        ( 10 +  3  = 13   )
@@ -204,6 +183,11 @@ end
 
 
 
+local noArg = (arg[1] == nil)
+
+if not noArg then goto yesArg end
+
+
 print('Simple Text Calculator\ntype ".help" for more info:\n')
 
 --> Main loop
@@ -211,7 +195,7 @@ while true do
     io.write('>> ')
     local input = io.read()
 
-    local cmd = input:match('%.%a+')
+    local cmd = input:match('%.[%a%-]+')
 
     if cmd then
         cmd = cmd:sub(2)
@@ -220,3 +204,6 @@ while true do
         print(analyzeIt(parseIt(input)))
     end
 end
+
+::yesArg::
+print(analyzeIt(parseIt(arg[1])))
