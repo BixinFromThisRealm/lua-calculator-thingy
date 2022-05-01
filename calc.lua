@@ -202,7 +202,7 @@ local noArg = (arg[1] == nil)
 if not noArg then goto yesArg end
 
 
-print('Simple Text Calculator\ntype ".help" for more info:\n')
+print('Lua Calculator Thingy\ntype ".help" for more info:\n')
 
 --> Main loop
 while true do
