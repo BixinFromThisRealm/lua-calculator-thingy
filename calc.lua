@@ -1,3 +1,17 @@
+--[[
+
+TODO:
+
+- Refactor a bit of the C.L. argument code.
+
+- Implement unary operations.
+
+- Implement functions with varying and optional parameters,
+  the goal being to make an alias for every function in the lua math library.
+    
+- Maybe after implementing functions make a .help-about meta-command.
+]]
+
 io.output():setvbuf 'no'
 
 
