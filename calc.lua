@@ -2,7 +2,8 @@
 
 TODO:
 
-- Refactor a bit of the C.L. argument code.
++ Refactor a bit of the C.L. argument code.
+  (Actually, the C.L. argument code is alright, for now at least)
 
 - Implement unary operations.
 
@@ -183,8 +184,8 @@ function analyzeIt(tokens)
                 print('can\'t understand "' .. v .. '" operator.')
                 return
             end
-            -- print(table.concat(stack, ', '))
         end
+        -- print(table.concat(stack, ', '))
     end
 
     if not (#stack <= 1) then

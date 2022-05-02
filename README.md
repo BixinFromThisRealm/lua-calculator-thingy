@@ -31,8 +31,8 @@ Since the calculator works in this REPL way, we obviously need a way of exiting 
 
 To use a meta-command you first type the `.` escape character, and then type the command you wish. Right now there are only three available meta-commands:
 
-`.help`, which prints a help message with details about the calculator.
+* `.help`, which prints a help message with details about the calculator.
 
-`.cls`, which clears the terminal.
+* `.cls`, which clears the terminal.
 
-`.exit`, which exits the program.
+* `.exit`, which exits the program.
