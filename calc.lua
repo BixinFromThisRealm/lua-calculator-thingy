@@ -4,6 +4,7 @@ TODO:
 
 + Refactor a bit of the C.L. argument code.
   (Actually, the C.L. argument code is alright, for now at least)
+  (No wait it's terrible, but at least now i fixed it.)
 
 - Implement unary operations.
 
@@ -198,9 +199,10 @@ end
 
 
 
-local noArg = (arg[1] == nil)
-
-if not noArg then goto yesArg end
+if (arg[1] ~= nil) then
+    print(analyzeIt(parseIt(arg[1])))
+    os.exit()
+end
 
 
 print('Lua Calculator Thingy\ntype ".help" for more info:\n')
@@ -220,5 +222,3 @@ while true do
     end
 end
 
-::yesArg::
-print(analyzeIt(parseIt(arg[1])))
