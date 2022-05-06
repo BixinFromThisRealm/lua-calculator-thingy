@@ -88,7 +88,7 @@ OP = {
 --> Creates a parse tree (in this case, a table) from a mathematical expression.
 --> Based on https://en.wikipedia.org/wiki/Shunting_yard_algorithm
 function parseIt(exp)
-    exp = string.gsub(exp, '[%(%)%-%+%*/%%]', '  %0  ') --> ensure tokens are separated by spaces
+    exp = string.gsub(exp, '[%(%)%-%+%*/%%%^]', ' %0 ') --> ensure tokens are separated by spaces
 
     local tokens = {}
 
